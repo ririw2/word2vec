@@ -2,7 +2,7 @@ Github version
 ==============
 
 I cloned this from code.google.com, because I like wordvec, and I don't want it to disappear. 
-
+Note that I don't really know what the deal is with the links to the binary files in this readme. As with anything like this, be careful with things you download off of the internet.
 
 Introduction
 ============
@@ -24,6 +24,7 @@ The word2vec tool takes a text corpus as input and produces the word vectors as 
 
 A simple way to investigate the learned representations is to find the closest words for a user-specified word. The distance tool serves that purpose. For example, if you enter 'france', distance will display the most similar words and their distances to 'france', which should look like:
 
+```
                  Word       Cosine distance
 -------------------------------------------
                 spain              0.678515
@@ -36,6 +37,7 @@ A simple way to investigate the learned representations is to find the closest w
                russia              0.571507
               germany              0.563291
             catalonia              0.534176
+```
 
 There are two main learning algorithms in word2vec : continuous bag-of-words and continuous skip-gram. The switch -cbow allows the user to pick one of these learning algorithms. Both algorithms learn the representation of a word that is useful for prediction of other words in the sentence. These algorithms are described in detail in [1,2].
 Interesting properties of the word vectors
@@ -112,23 +114,23 @@ Performance
 
 The training speed can be significantly improved by using parallel training on multiple-CPU machine (use the switch '-threads N'). The hyper-parameter choice is crucial for performance (both speed and accuracy), however varies for different applications. The main choices to make are:
 
-    architecture: skip-gram (slower, better for infrequent words) vs CBOW (fast)
-    the training algorithm: hierarchical softmax (better for infrequent words) vs negative sampling (better for frequent words, better with low dimensional vectors)
-    sub-sampling of frequent words: can improve both accuracy and speed for large data sets (useful values are in range 1e-3 to 1e-5)
-    dimensionality of the word vectors: usually more is better, but not always
-    context (window) size: for skip-gram usually around 10, for CBOW around 5 
+- architecture: skip-gram (slower, better for infrequent words) vs CBOW (fast)
+- the training algorithm: hierarchical softmax (better for infrequent words) vs negative sampling (better for frequent words, better with low dimensional vectors)
+- sub-sampling of frequent words: can improve both accuracy and speed for large data sets (useful values are in range 1e-3 to 1e-5)
+- dimensionality of the word vectors: usually more is better, but not always
+- context (window) size: for skip-gram usually around 10, for CBOW around 5 
 
 Where to obtain the training data
 =================================
 
 The quality of the word vectors increases significantly with amount of the training data. For research purposes, you can consider using data sets that are available on-line:
 
-    First billion characters from wikipedia (use the pre-processing perl script from the bottom of Matt Mahoney's page)
-    Latest Wikipedia dump Use the same script as above to obtain clean text. Should be more than 3 billion words.
-    WMT11 site: text data for several languages (duplicate sentences should be removed before training the models)
-    Dataset from "One Billion Word Language Modeling Benchmark" Almost 1B words, already pre-processed text.
-    UMBC webbase corpus Around 3 billion words, more info here. Needs further processing (mainly tokenization).
-    Text data from more languages can be obtained at statmt.org and in the Polyglot project. 
+- First billion characters from wikipedia (use the pre-processing perl script from the bottom of Matt Mahoney's page)
+- Latest Wikipedia dump Use the same script as above to obtain clean text. Should be more than 3 billion words.
+- WMT11 site: text data for several languages (duplicate sentences should be removed before training the models)
+- Dataset from "One Billion Word Language Modeling Benchmark" Almost 1B words, already pre-processed text.
+- UMBC webbase corpus Around 3 billion words, more info here. Needs further processing (mainly tokenization).
+- Text data from more languages can be obtained at statmt.org and in the Polyglot project. 
 
 Pre-trained word and phrase vectors
 ===================================
@@ -188,24 +190,17 @@ Final words
 Thank you for trying out this toolkit, and do not forget to let us know when you obtain some amazing results! We hope that the distributed representations will significantly improve the state of the art in NLP.
 References
 
-    [1] Tomas Mikolov, Kai Chen, Greg Corrado, and Jeffrey Dean. Efficient Estimation of Word Representations in Vector Space. In Proceedings of Workshop at ICLR, 2013. 
-
-    [2] Tomas Mikolov, Ilya Sutskever, Kai Chen, Greg Corrado, and Jeffrey Dean. Distributed Representations of Words and Phrases and their Compositionality. In Proceedings of NIPS, 2013. 
-
-    [3] Tomas Mikolov, Wen-tau Yih, and Geoffrey Zweig. Linguistic Regularities in Continuous Space Word Representations. In Proceedings of NAACL HLT, 2013. 
+1. Tomas Mikolov, Kai Chen, Greg Corrado, and Jeffrey Dean. Efficient Estimation of Word Representations in Vector Space. In Proceedings of Workshop at ICLR, 2013. 
+2. Tomas Mikolov, Ilya Sutskever, Kai Chen, Greg Corrado, and Jeffrey Dean. Distributed Representations of Words and Phrases and their Compositionality. In Proceedings of NIPS, 2013. 
+3.  Tomas Mikolov, Wen-tau Yih, and Geoffrey Zweig. Linguistic Regularities in Continuous Space Word Representations. In Proceedings of NAACL HLT, 2013. 
 
 Other useful links
 
 Feel free to send us a link to your project or research paper related to word2vec that you think will be useful or interesting for the others.
 
-    Tomas Mikolov, Quoc V. Le and Ilya Sutskever. Exploiting Similarities among Languages for Machine Translation. We show how the word vectors can be applied to machine translation. Code for improved version from Georgiana Dinu here. 
-
-    Word2vec in Python by Radim Rehurek in gensim (plus tutorial and demo that uses the above model trained on Google News). 
-
-    Word2vec in Java as part of the deeplearning4j project. Another Java version from Medallia here. 
-
-    Word2vec implementation in Spark MLlib. 
-
-    Comparison with traditional count-based vectors and cbow model trained on a different corpus by CIMEC UNITN. 
-
-    Link to slides about word vectors from NIPS 2013 Deep Learning Workshop: NNforText.pdf 
+- Tomas Mikolov, Quoc V. Le and Ilya Sutskever. [Exploiting Similarities among Languages for Machine Translation](http://arxiv.org/pdf/1309.4168). We show how the word vectors can be applied to machine translation. Code for improved version from Georgiana Dinu here. 
+- Word2vec in Python by Radim Rehurek in [gensim](http://radimrehurek.com/2013/09/deep-learning-with-word2vec-and-gensim/) (plus [tutorial](http://radimrehurek.com/2014/02/word2vec-tutorial/) and [demo](http://radimrehurek.com/2014/02/word2vec-tutorial/#app) that uses the above model trained on Google News). 
+- Word2vec in Java as part of the [deeplearning4j](http://deeplearning4j.org/word2vec.html) project. Another Java version from Medallia [here](https://github.com/medallia/Word2VecJava). 
+- Word2vec implementation in Spark [MLlib](https://spark.apache.org/docs/latest/mllib-feature-extraction.html#word2vec). 
+- Comparison with traditional count-based vectors and cbow model trained on a different corpus by [CIMEC UNITN](http://clic.cimec.unitn.it/composes/semantic-vectors.html). 
+- Link to slides about word vectors from NIPS 2013 Deep Learning Workshop: [NNforText.pdf](https://drive.google.com/file/d/0B7XkCwpI5KDYRWRnd1RzWXQ2TWc/edit?usp=sharing)
